@@ -1,0 +1,4 @@
+# Allow Git to ignore these files
+
+# Python
+*.pyc
