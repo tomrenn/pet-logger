@@ -11,11 +11,12 @@ GROUP_NAME = 'name'
 # return highest shortCodeInteger + 1
 def getNextPetGroupCode():
 	q = PetGroup.all()
-	q.order('shortCodeInteger')
+	q.order('-shortCodeInteger')
 	group = q.get()
 
 	if group:
-		return (group.shortCodeInteger + 1)
+		updatedPos = group.shortCodeInteger + 1
+		return updatedPos
 	else:
 		return 0
 
@@ -23,22 +24,19 @@ class SignupGroupHandler(AppHandler):
 	def post(self):
 		name = self.request.get(GROUP_NAME)
 
-
-
-
 	def get(self):
 		
 		name = self.request.get(GROUP_NAME)
 		if not name:
 			self.writeError('Sorry, you must have a group name')
 		else:
-			from util import *
+			import util
 			sci = getNextPetGroupCode()
 			newPetGroup = PetGroup(name = name, shortCodeInteger = sci)
 			
 			newPetGroup.put()
 
-			shortcode = encode(sci)
+			shortcode = util.encode(sci)
 
 			self.writeJSON( {
 					GROUP_NAME : newPetGroup.name,

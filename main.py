@@ -15,7 +15,6 @@
 # limitations under the License.
 #
 import webapp2
-import util
 import json
 from entities import PetGroup, db
 from handlers import SignupGroup
