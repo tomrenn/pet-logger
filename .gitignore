@@ -1,4 +1,7 @@
 # Allow Git to ignore these files
 
+# Mac
+.DS_Store
+
 # Python
 *.pyc
