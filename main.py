@@ -15,19 +15,20 @@
 # limitations under the License.
 #
 import webapp2
-import util
 import json
 from entities import PetGroup, db
-from handlers import SignupGroup
+from handlers import SignupPet
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
       pass
 
 
-
-
 app = webapp2.WSGIApplication([
-    ('/', MainHandler),
-    ('/createGroup', SignupGroup.SignupGroupHandler)
+    ('/', SignupPet.UploadURL),
+    ('/pet/upload', SignupPet.UploadHandler),
+    ('/pet/error', SignupPet.ErrorHandler),
+   # ('/pet/success/([^/]+)?', SignupPet.SuccessHandler),
+    ('/pet/img/([^/]+)', SignupPet.ServeHandler),
+    ('/pet/?([^/]+)?', SignupPet.UploadURL)
 ], debug=True)
